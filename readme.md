@@ -186,7 +186,7 @@ sort(sort(sort([2,1])))
 
 ## Estilo Livre de Apontamento
 
-Esse estilo se define ao escrever funções que não identificam explicitamente os argumentos usados. Geralmente requer [currying](#currying) ou outra [função de ordem maior](#higher-order-functions-hof). Mais conhecido como programação implícita.
+Esse estilo se define ao escrever funções que não identificam explicitamente os argumentos usados. Geralmente requer [currying](#currying) ou outra [função de ordem maior](#fun%C3%A7%C3%B5es-de-ordem-maior-hoff). Mais conhecido como programação implícita.
 
 ```js
 // Dado
@@ -226,7 +226,7 @@ TODO
 
 ## Categorias
 
-Objetos com funções associadas que aderem a certas regras. Exemplo:  [Monóide](#monoid)
+Objetos com funções associadas que aderem a certas regras. Exemplo:  [Monóide](#monoide)
 
 ## Valor
 
@@ -249,7 +249,7 @@ const five = 5
 const john = {name: 'John', age: 30}
 ```
 
-Constantes são  [transparentes referencialmente](#referential-transparency). Ou seja, podem ser substituídas pelos valores que representam sem afetar o resultado.
+Constantes são  [transparentes referencialmente](#transpar%C3%AAncia-referencial). Ou seja, podem ser substituídas pelos valores que representam sem afetar o resultado.
 
 Com as duas constantes acima, a expressão a seguir vai retornar `true` sempre.
 
@@ -408,7 +408,7 @@ compose(foo, identity) ≍ compose(identity, foo) ≍ foo
 
 ## Monade
 
-Uma monade é um objeto com funções [`of`](#pointed-functor) e `chain`. `chain` é tipo [`map`](#functor), exceto pelo fato que "desninha" o objeto aninhado resultante.
+Uma monade é um objeto com funções [`of`](#functor-apontado) e `chain`. `chain` é tipo [`map`](#functor), exceto pelo fato que "desninha" o objeto aninhado resultante.
 
 ```js
 ['cat,dog', 'fish,bird'].chain((a) => a.split(',')) // ['cat', 'dog', 'fish', 'bird']
@@ -583,7 +583,7 @@ Isso é chamado de produto porque o total de valores possíveis da estrutura de 
 Veja também [Teoria dos conjuntos](https://en.wikipedia.org/wiki/Set_theory).
 
 ## Opção
-Opção é um [tipo de união](#union-type) com duas classes que geralmente são chamadas de  `Some` (_alguma_) e  `None` (_nenhuma_). 
+Opção é um [tipo de união](#tipo-de-uni%C3%A3o) com duas classes que geralmente são chamadas de  `Some` (_alguma_) e  `None` (_nenhuma_). 
 
 Opção é útil para compor funções que podem não retornar um valor.
 
