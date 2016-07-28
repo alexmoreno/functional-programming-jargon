@@ -1,25 +1,25 @@
-# Contributing
+# Contribuição
 
-This project is a work in progress. Contributions are very welcome.
+Este projeto está em construção. Conribuições são muito bem-vindas.
 
-That said, we'd like to maintain some consistency across the document.
+Dito isso, gostaríamos de manter algumas consistências no decorrer do documento.
 
-## Style guide
-1. Every definition should include at least one JavaScript code example.
-1. Definitions should be written using the simplest language possible. Every word should tell.
-1. Target programmers that have no functional programming experience.
-1. We value understandability more than accuracy. e.g. It's okay to describe a functor as a container.
-1. Don't overuse jargon even if defined elsewhere in the document.
-1. Link to terms defined in the document when you use them in a definition.
-1. Avoid big walls of text
+## Guia de estilo
+1. Cada definição deve incluir pelo meons um exemplo de código em JavaScript.
+1. Definições devem ser escritas usando a linguagem mais simples possível. 
+1. Mire nos programadores que não tem experiência em programação funcional.
+1. Valorizamos mais a compreensão do que a precisão. Por exemplo, tudo bem em descrever um functor como um container.
+1. Não abuse dos jargões, mesmo se ele já estiver definido no documento.
+1. Faça links para termos definidos no documento quando for usá-los em uma definição.
+1. Evite textões.
 
-## Code conventions
-Be consistent with other examples
+## Convenção de código
+Seja consistente com os outros exemplos.
 
-* Prefer arrow functions
-* Parenthesis around function arguments
-* Put output values in comments
-* Use semi-colons
-* Keep it short and simple
+* Prefira arrow functions
+* Parênteses ao redor dos argumentos das funções
+* Valores de saída nos comentários
+* Use ponto-e-vírgula
+* Simples e direto
 
-This styleguide is a WIP too! Send PRs :)
+Esse guia de estilo é um WIP também! Mandem PRs!

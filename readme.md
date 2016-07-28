@@ -1,68 +1,71 @@
-# Functional Programming Jargon
+# Jargões da Programação Funcional
 
-The goal of this document is to define jargon from functional programming in plain english with examples.
+O objetivo desse documento é definir os jargões da programação funcional em inglês simples com exemplos.
 
-*This is a WIP; please feel free to send a PR ;)*
+*Isso aqui é um WIP; Sinta-se a vontade para enviar um PR ;)*
 
-Where applicable, this document uses terms defined in the [Fantasy Land spec](https://github.com/fantasyland/fantasy-land)
+Esse documento usa termos definidos na [Fantasy Land spec](https://github.com/fantasyland/fantasy-land) quando aplicável.
 
 <!-- RM(noparent,notop) -->
 
-* [Arity](#arity)
-* [Higher-Order Functions (HOF)](#higher-order-functions-hof)
-* [Partial Application](#partial-application)
+* [Aridade](#aridade)
+* [Funções de Ordem Maior (HOF)](#fun%C3%A7%C3%B5es-de-ordem-maior-hof)
+* [Aplicações Parciais](#aplica%C3%A7%C3%B5es-parciais)
 * [Currying](#currying)
-* [Function Composition](#function-composition)
-* [Purity](#purity)
-* [Side effects](#side-effects)
-* [Idempotent](#idempotent)
-* [Point-Free Style](#point-free-style)
-* [Predicate](#predicate)
-* [Contracts](#contracts)
-* [Guarded Functions](#guarded-functions)
-* [Categories](#categories)
-* [Value](#value)
-* [Constant](#constant)
+* [Composição de Função](#composi%C3%A7%C3%A3o-de-fun%C3%A7%C3%A3o)
+* [Pureza](#pureza)
+* [Efeitos Colaterais](#pureza)
+* [Idempotente](#idempotente)
+* [Estilo Livre de Apontamento](#estilo-livre-de-apontamento)
+* [Predicado](#predicado)
+* [Contratos](#contratos)
+* [Funções Guardadas](#fun%C3%A7%C3%B5es-guardadas)
+* [Categorias](#categorias)
+* [Valor](#valor)
+* [Constante](#constante)
 * [Functor](#functor)
-* [Pointed Functor](#pointed-functor)
-* [Lift](#lift)
-* [Referential Transparency](#referential-transparency)
-* [Equational Reasoning](#equational-reasoning)
-* [Lazy evaluation](#lazy-evaluation)
-* [Monoid](#monoid)
-* [Monad](#monad)
-* [Comonad](#comonad)
-* [Applicative Functor](#applicative-functor)
-* [Morphism](#morphism)
-* [Isomorphism](#isomorphism)
-* [Setoid](#setoid)
-* [Semigroup](#semigroup)
-* [Foldable](#foldable)
-* [Traversable](#traversable)
-* [Type Signatures](#type-signatures)
-* [Union type](#union-type)
-* [Product type](#product-type)
-* [Option](#option)
+* [Functor Apontado](#functor-apontadoo
+* [Levantamento](#levantamento)
+* [Transparência Referencial](#transpar%C3%AAncia-referencial)
+* [Raciocínio Equacional](#racioc%C3%ADnio-equacional)
+* [Avaliação Preguiçosa](#avalia%C3%A7%C3%A3o-pregui%C3%A7osa)
+* [Monóide](#mon%C3%B3ide)
+* [Monade](#monade)
+* [Comonade](#comonade)
+* [Functor Aplicativo](#functor-aplicativo)
+* [Morfismo](#morfismo)
+* [Isomorfismo](#isomorfismo)
+* [Setóide](#set%C3%B3ide)
+* [Semigrupo](#semigrupo)
+* [Dobrável](#dobr%C3%A1vel)
+* [Transversável](#travers%C3%A1vel)
+* [Assinatura de Tipos](#assinaturas-de-tipo)
+* [Tipo de União](#tipo-de-uni%C3%A3o)
+* [Tipo de Produto](#tipo-de-produto)
+* [Opção](#op%C3%A7%C3%A3o)
 
 
 <!-- /RM -->
 
-## Arity
+## Aridade
 
-The number of arguments a function takes. From words like unary, binary, ternary, etc. This word has the distinction of being composed of two suffixes, "-ary" and "-ity." Addition, for example, takes two arguments, and so it is defined as a binary function or a function with an arity of two. Such a function may sometimes be called "dyadic" by people who prefer Greek roots to Latin. Likewise, a function that takes a variable number of arguments is called "variadic," whereas a binary function must be given two and only two arguments, currying and partial application notwithstanding (see below).
+O número de argumentos que uma função recebe. Vem das palavras tipo unário, binário, ternário, etc. Essa palavra possui a característica de ser formada por dois sufixos, "-ário" e "-idade". Soma, por exemplo, recebe dois argumentos, portanto é definido como uma função binária ou uma função com aridade dois. Funções assim podem ser chamadas de "Diádica" pelos amantes das raízes gregas ao invés das latinas. Da mesma forma, uma função que recebe um número variável de argumentos é chamada de "variádica", enquanto uma função binária deve possuir dois e apenas dois argumentos, não obstante o currying e a aplicação parcial (veja abaixo).
+
+
 
 ```js
-const sum = (a, b) => a + b;
+const soma = (a, b) => a + b;
 
-const arity = sum.length;
-console.log(arity); // 2
+const aridade = soma.length;
+console.log(aridade); // 2
 
-// The arity of sum is 2
+// A aridade de soma é 2
 ```
 
-## Higher-Order Functions (HOF)
+## Funções de Ordem Maior (HOF)
 
-A function which takes a function as an argument and/or returns a function.
+Uma função que recebe outra função como argumento e/ou retorna uma função.
+
 
 ```js
 const filter = (pred, xs) => {
@@ -84,26 +87,27 @@ const is = (type) => (x) => Object(x) instanceof type;
 filter(is(Number), [0, '1', 2, null]); // [0, 2]
 ```
 
-## Partial Application
+## Aplicações Parciais
 
-The process of getting a function with lesser arity compared to the original
-function by fixing the number of arguments is known as partial application.
+O processo de receber uma função com menor aridade comparada à função original, corrigindo o número de argumentos, é conhecido como aplicação parcial.
 
 ```js
 let sum = (a, b) => a + b;
 
-// partially applying `a` to `40`
+// aplicando parcialmente `a` para `40`
 let partial = sum.bind(null, 40);
 
-// Invoking it with `b`
+// invocando com b `b`
 partial(2); // 42
 ```
 
 ## Currying
 
-The process of converting a function that takes multiple arguments into a function that takes them one at a time.
+O processo de converter uma função que recebe múltiplos argumentos em uma função que os recebe um de cada vez.
 
-Each time the function is called it only accepts one argument and returns a function that takes one argument until all arguments are passed.
+Cada vez que a função é chamada, aceita somente um argumento e retorna uma função que recebe um argumento até que todos sejam passados.
+
+
 
 ```js
 const sum = (a, b) => a + b;
@@ -118,55 +122,55 @@ add2(10) // 12
 
 ```
 
-## Function Composition
+## Composição de Função
 
-The act of putting two functions together to form a third function where the output of one function is the input of the other.
+O ato de colocar duas funções juntas para forma uma terceira função onde a saída dessa função é a entrada de outra.
+
 
 ```js
 const compose = (f, g) => (a) => f(g(a)) // Definition
-const floorAndToString = compose((val) => val.toString(), Math.floor) // Usage
+const floorAndToString = compose((val) => val.toString(), Math.floor) // Uso
 floorAndToString(121.212121) // "121"
 ```
 
-## Purity
+## Pureza
 
-A function is pure if the return value is only determined by its
-input values, and does not produce side effects.
+Uma função é pura quando o valor de retorno é determinado apenas pelas suas entradas, e não produz efeitos colaterais.
 
 ```js
-let greet = (name) => "Hi, " + name ;
+let greet = (name) => "Olá, " + name ;
 
-greet("Brianne") // "Hi, Brianne"
+greet("Brianne") // "Olá, Brianne"
 
 ```
 
-As opposed to:
+Em oposição à:
 
 ```js
 
 let greeting;
 
-let greet = () => greeting = "Hi, " + window.name;
+let greet = () => greeting = "Olá, " + window.name;
 
-greet(); // "Hi, Brianne"
+greet(); // "Olá, Brianne"
 
 ```
 
-## Side effects
+## Efeitos Colaterais
 
-A function or expression is said to have a side effect if apart from returning a value, it interacts with (reads from or writes to) external mutable state.
+Dizemos que uma função ou expressão tem efeitos colaterais se além de retornar um valor, ela interaja com (lê ou escreve) estados mutáveis eternos.
 
 ```js
 var differentEveryTime = new Date();
 ```
 
 ```js
-console.log("IO is a side effect!");
+console.log("IO é um efeito colateral!");
 ```
 
-## Idempotent
+## Idempotente
 
-A function is idempotent if reapplying it to its result does not produce a different result.
+Uma função é idempotente se ao reaplicá-la ao seu próprio resultado não produz um resultado diferente.
 
 ```js
 f(f(x)) = f(x)
@@ -180,30 +184,31 @@ Math.abs(Math.abs(10))
 sort(sort(sort([2,1])))
 ```
 
-## Point-Free Style
+## Estilo Livre de Apontamento
 
-Writing functions where the definition does not explicitly identify the arguments used. This style usually requires [currying](#currying) or other [Higher-Order functions](#higher-order-functions-hof). A.K.A Tacit programming.
+Esse estilo se define ao escrever funções que não identificam explicitamente os argumentos usados. Geralmente requer [currying](#currying) ou outra [função de ordem maior](#higher-order-functions-hof). Mais conhecido como programação implícita.
 
 ```js
-// Given
+// Dado
 let map = (fn) => (list) => list.map(fn);
 let add = (a) => (b) => a + b;
 
-// Then
+// Então
 
-// Not points-free - `numbers` is an explicit argument
+// Não é livre de apontamento - `numbers` é um argumento explícito
 let incrementAll = (numbers) => map(add(1))(numbers);
 
-// Points-free - The list is an implicit argument
+// Livre de apontamento - A lista é um argumento implícito
 let incrementAll2 = map(add(1));
 ```
 
-`incrementAll` identifies and uses the parameter `numbers`, so it is not points-free.  `incrementAll2` is written just by combining functions and values, making no mention of its arguments.  It __is__ points-free.
+`incrementAll` identifica e usa o parâmetro `numbers`, logo, não é livre de apontamento.  `incrementAll2` é escrita combinando funções e valores, não fazendo menção aos seus argumentos. Ela __é__ livre de apontamento.
 
-Points-free function definitions look just like normal assignments without `function` or `=>`.
+Definição de funções livre de apontamento são como funções normais, mas sem `function` ou `=>`.
 
-## Predicate
-A predicate is a function that returns true or false for a given value. A common use of a predicate is as the callback for array filter.
+
+## Predicado
+Um predicado é uma função que retorna verdadeiro ou falso de acordo com um valor dado. Um uso comum de predicados é o callback de filtros de array.
 
 ```js
 const predicate = (a) => a > 2;
@@ -211,42 +216,42 @@ const predicate = (a) => a > 2;
 [1, 2, 3, 4].filter(predicate); // [3, 4]
 ```
 
-## Contracts
+## Contratos
 
 TODO
 
-## Guarded Functions
+## Funções Guardadas
 
 TODO
 
-## Categories
+## Categorias
 
-Objects with associated functions that adhere to certain rules. E.g. [Monoid](#monoid)
+Objetos com funções associadas que aderem a certas regras. Exemplo:  [Monóide](#monoid)
 
-## Value
+## Valor
 
-Anything that can be assigned to a variable.
+Qualquer coisa que possa ser atribuída a uma variável.
 
 ```js
 5
-Object.freeze({name: 'John', age: 30}) // The `freeze` function enforces immutability.
+Object.freeze({name: 'John', age: 30}) // A função `freeze` força a imutabilidade.
 (a) => a
 [1]
 undefined
 ```
 
-## Constant
+## Constante
 
-A variable that cannot be reassigned once defined.
+Uma variável que não pode ser reatribuída após ser definida pela primeira vez.
 
 ```js
 const five = 5
 const john = {name: 'John', age: 30}
 ```
 
-Constants are [referentially transparent](#referential-transparency). That is, they can be replaced with the values that they represent without affecting the result.
+Constantes são  [transparentes referencialmente](#referential-transparency). Ou seja, podem ser substituídas pelos valores que representam sem afetar o resultado.
 
-With the above two constants the following expression will always return `true`.
+Com as duas constantes acima, a expressão a seguir vai retornar `true` sempre.
 
 ```js
 john.age + five === ({name: 'John', age: 30}).age + (5)
@@ -254,35 +259,36 @@ john.age + five === ({name: 'John', age: 30}).age + (5)
 
 ## Functor
 
-An object with a `map` function that adheres to certain rules. `Map` runs a function on values in an object and returns a new object.
+Um objeto com uma função `map` que adere a certas regras. `Map` executa uma função sobre os valores de um objeto e retorna um objeto novo.
 
-A common functor in javascript is `Array`
+
+Um functor comum no js é `Array`
 
 ```js
 [2, 3, 4].map((n) => n * 2); // [4, 6, 8]
 ```
 
-If `func` is an object implementing a `map` function, and `f`, `g` be arbitrary functions, then `func` is said to be a functor if the map function adheres to the following rules:
+Se `func` é um objeto implementando uma função de `map` e `f` e `g` são funções arbitrárias, então diz-se que `func` é o functor se a função map adere às seguintes regras.
 
 ```js
-// identity
+// identidade
 func.map((x) => x) === func
 ```
 
-and
+e
 
 ```js
-// composition
+// composição
 func.map((x) => f(g(x))) === func.map(g).map(f)
 ```
 
-We can now see that `Array` is a functor because it adheres to the functor rules.
+Podemos agora ver que  `Array` é um functor pois adere às regras do functor.
 
 ```js
 [1, 2, 3].map((x) => x); // = [1, 2, 3]
 ```
 
-and
+e
 
 ```js
 let f = (x) => x + 1;
@@ -292,10 +298,10 @@ let g = (x) => x * 2;
 [1, 2, 3].map(g).map(f);     // = [3, 5, 7]
 ```
 
-## Pointed Functor
-A functor with an `of` function that puts _any_ single value into that functor.
+## Functor Apontado
+Um functor com uma função `of` que coloca _qualquer_ valor individual naquele functor.
 
-Array Implementation:
+Implementação em Array:
 
 ```js
 Array.prototype.of = (v) => [v];
@@ -303,43 +309,43 @@ Array.prototype.of = (v) => [v];
 [].of(1) // [1]
 ```
 
-## Lift
+## Levantamento
 
-Lift is like `map` except it can be applied to multiple functors.
+Levantamento é tipo um  `map`, exceto pelo fato que pode ser aplicado a múltiplos functores.
 
-Map is the same as a lift over a one-argument function:
+Map é o mesmo que um levantamento sobre uma função de um argumento.
+
 
 ```js
 lift((n) => n * 2)([2, 3, 4]); // [4, 6, 8]
 ```
 
-Unlike map lift can be used to combine values from multiple arrays:
+Diferente de map, levantamento pode ser usado para combinar valores de múltiplas arrays.
 
 ```js
 lift((a, b) => a * b)([1, 2], [3]); // [3, 6]
 ```
 
-## Referential Transparency
+## Transparência Referencial
 
-An expression that can be replaced with its value without changing the
-behavior of the program is said to be referentially transparent.
+Uma expressão que pode ser substituída pelo seu valor sem alterar o comportamento do programa, é dita como referencialmente transparente.
 
-Say we have function greet:
+Vamos supor que temos a função `greet`:
 
 ```js
 let greet = () => "Hello World!";
 ```
 
-Any invocation of `greet()` can be replaced with `Hello World!` hence greet is
-referentially transparent.
+Qualquer invocação de `greet` pode ser substituida com `Hello World!`, logo `greet` é referencialmente transparente.
 
-##  Equational Reasoning
 
-When an application is composed of expressions and devoid of side effects, truths about the system can be derived from the parts.
+## Raciocínio Equacional
 
-## Lazy evaluation
+Quando uma aplicação é composta de expressão e desprovida de efeitos colaterais, as verdades sobre o sistema podem ser derivadas de suas partes.
 
-Lazy evaluation is a call-by-need evaluation mechanism that delays the evaluation of an expression until its value is needed. In functional languages, this allows for structures like infinite lists, which would not normally be available in an imperative language where the sequencing of commands is significant.
+## Avaliação Preguiçosa
+
+Avaliação Preguiçosa é um mecanismo de avaliação chamado conforme necessidade que atrasa a avaliação de uma expressão até que seu valor seja requerido. Em linguagens funcionais, isso permite o uso de estruturas tipo listas infinitas, o que não seria possível normalmente em uma linguagem imperativa onde a sequência dos comandos é significante.
 
 ```js
 let rand = function*() {
@@ -351,46 +357,47 @@ let rand = function*() {
 
 ```js
 let randIter = rand();
-randIter.next(); // Each execution gives a random value, expression is evaluated on need.
+randIter.next(); // Cada execução retorna um valor conforme necessário.
 ```
 
-## Monoid
+## Monóide
 
-A monoid is some data type and a two parameter function that "combines" two values of the type, where an identity value that does not affect the result of the function also exists.
+Monóide é um tipo de dado junto de uma função de dois parâmetros que "combina" dois valores do tipo, onde um valor de identidade que não afeta o resultado da função também existe.
 
-One very simple monoid is numbers and addition:
+Um monóide bem simples é números e adição.
+
 
 ```js
 1 + 1; // 2
 ```
 
-The data type is number and the function is `+`, the addition of two numbers.
+O tipo do dado é número e a função é `+`, a adição dos dois números.
 
 ```js
 1 + 0; // 1
 ```
 
-The identity value is `0` - adding `0` to any number will not change it.
+O valor de identidade é `0`, adicionar `0` a qualquer número não vai alterá-lo.
 
-For something to be a monoid, it's also required that the grouping of operations will not affect the result:
+Para algo ser um monóide, também é necessário que o agrupamento das operações não afete o resultado.
 
 ```js
 1 + (2 + 3) === (1 + 2) + 3; // true
 ```
 
-Array concatenation can also be said to be a monoid:
+Concatenação de arrays também pode ser chamado de monóide.
 
 ```js
 [1, 2].concat([3, 4]); // [1, 2, 3, 4]
 ```
 
-The identity value is empty array `[]`
+O valor identidade é um array vazio `[]`
 
 ```js
 [1, 2].concat([]); // [1, 2]
 ```
 
-If identity and compose functions are provided, functions themselves form a monoid:
+Se identidade e funções de composições forem dados, as funções foram monóides por elas mesmas.
 
 ```js
 var identity = (a) => a;
@@ -399,23 +406,23 @@ var compose = (f, g) => (x) => f(g(x));
 compose(foo, identity) ≍ compose(identity, foo) ≍ foo
 ```
 
-## Monad
+## Monade
 
-A monad is an object with [`of`](#pointed-functor) and `chain` functions. `chain` is like [`map`](#functor) except it un-nests the resulting nested object.
+Uma monade é um objeto com funções [`of`](#pointed-functor) e `chain`. `chain` é tipo [`map`](#functor), exceto pelo fato que "desninha" o objeto aninhado resultante.
 
 ```js
 ['cat,dog', 'fish,bird'].chain((a) => a.split(',')) // ['cat', 'dog', 'fish', 'bird']
 
-//Contrast to map
+// Em contraste ao map
 ['cat,dog', 'fish,bird'].map((a) => a.split(',')) // [['cat', 'dog'], ['fish', 'bird']]
 ```
 
-`of` is also known as `return` in other functional languages.
-`chain` is also known as `flatmap` and `bind` in other languages.
+`of` também é conhecido como  `return` em outras linguagens funcionais.
+`chain` também é conhecido como  `flatmap` e `bind` em outras linguagens.
 
-## Comonad
+## Comonade
 
-An object that has `extract` and `extend` functions.
+Um objeto que possui as funções  `extract` e `extend`.
 
 ```js
 const CoIdentity = (v) => ({
@@ -425,38 +432,38 @@ const CoIdentity = (v) => ({
 })
 ```
 
-Extract takes a value out of a functor.
+Extract tira um valor do functor.
 
 ```js
 CoIdentity(1).extract() // 1
 ```
 
-Extend runs a function on the comonad. The function should return the same type as the comonad.
+Extend executa a função na comonade. A função deve retornar o mesmo tipo de comonade.
 
 ```js
 CoIdentity(1).extend((co) => co.extract() + 1) // CoIdentity(2)
 ```
 
-## Applicative Functor
+## Functor Aplicativo
 
-An applicative functor is an object with an `ap` function. `ap` applies a function in the object to a value in another object of the same type.
+Um functor aplicativo é um objeto com uma função  `ap`. `ap` aplica uma função no objeto a outro valor em outro objeto do mesmo tipo.
 
 ```js
 [(a) => a + 1].ap([1]) // [2]
 ```
 
-## Morphism
+## Morfismo
 
-A transformation function.
+Uma função de transformação.
 
-## Isomorphism
+## Isomorfimos
 
-A pair of transformations between 2 types of objects that is structural in nature and no data is lost.
+Um par de transformações entre 2 tipos de objetos que é estrutura por natureza e não há perda de dados.
 
-For example, 2D coordinates could be stored as an array `[2,3]` or object `{x: 2, y: 3}`.
+Exemplo, coordenadas 2D devem ser armazenadas em uma array `[2,3]` ou objeto `{x: 2, y: 3}`.
 
 ```js
-// Providing functions to convert in both directions makes them isomorphic.
+// Prover funções para converter em ambas as direções as faz isomórficas.
 const pairToCoords = (pair) => ({x: pair[0], y: pair[1]})
 
 const coordsToPair = (coords) => [coords.x, coords.y]
@@ -468,11 +475,11 @@ pairToCoords(coordsToPair({x: 1, y: 2})) // {x: 1, y: 2}
 
 
 
-## Setoid
+## Setóide
 
-An object that has an `equals` function which can be used to compare other objects of the same type.
+Um objeto que tem uma função  `equals` que pode ser usada para comparar outros objetos do mesmo tipo.
 
-Make array a setoid:
+Vamos transformar Array em setóide:
 
 ```js
 Array.prototype.equals = (arr) => {
@@ -492,35 +499,35 @@ Array.prototype.equals = (arr) => {
 [1, 2].equals([0]) // false
 ```
 
-## Semigroup
+## Semigrupo
 
-An object that has a `concat` function that combines it with another object of the same type.
+Um objeto que tem uma função `concat` que combina com outro objeto deo mesmo tipo.
 
 ```js
 [1].concat([2]) // [1, 2]
 ```
 
-## Foldable
+## Dobrável
 
-An object that has a `reduce` function that can transform that object into some other type.
+Um objeto que possui uma função `reduce` que pode transformar o objeto em outro tipo.
 
 ```js
 let sum = (list) => list.reduce((acc, val) => acc + val, 0);
 sum([1, 2, 3]) // 6
 ```
 
-## Traversable
+## Traversável
 
 TODO
 
-## Type Signatures
+## Assinaturas de Tipo
 
-Often functions will include comments that indicate the types of their arguments and return types.
+Frequentemente, as funçẽos vão incluir comentário quy indicam os tipos dos seus argumentos e retornos.
 
-There's quite a bit of variance across the community but they often follow the following patterns:
+Há uma pequena variância na comunidade, mas geralmente seguem os seguintes padrões:
 
 ```js
-// functionName :: firstArgType -> secondArgType -> returnType
+// nomeDaFunção :: tipoDoPrimeiroArgumento -> tipoDoSegundoArgumento -> tipoDoRetorno
 
 // add :: Number -> Number -> Number
 let add = (x) => (y) => x + y
@@ -529,59 +536,59 @@ let add = (x) => (y) => x + y
 let increment = (x) => x + 1
 ```
 
-If a function accepts another function as an argument it is wrapped in parenthesis.
+Se uma função aceita outra função como parâmetro, ela é envolva em parêntese.
 
 ```js
 // call :: (a -> b) -> a -> b
 let call = (f) => (x) => f(x)
 ```
 
-The letters `a`, `b`, `c`, `d` are used to signify that the argument can be of any type. For this `map` it takes a function that transforms a value of some type `a` into another type `b`, an array of values of type `a`, and returns an array of values of type `b`.
+As letras  `a`, `b`, `c`, `d` são usadas para mostrar que o argumento pode ser de qualquer tipo. Nesse `map`, recebe uma função que transforma um valor do tipo `a` em outro do tipo `b`, ou um array de valores do tipo `a` e retorna um array de valores do tipo `b`.
 
 ```js
 // map :: (a -> b) -> [a] -> [b]
 let map = (f) => (list) => list.map(f)
 ```
 
-## Union type
-A union type is the combination of two types together into another one.
+## Tipo de união
+Um tipo de união é a combinação de dois tipos em um terceiro.
 
-JS doesn't have static types but let's say we invent a type `NumOrString` which is a sum of `String` and `Number`.
+JS não tem tipos estáticos, mas vamos supor que queremos inventar um tipo `NumOrString`, que é a soma de um `String` e um `Number`.
 
-The `+` operator in JS works on strings and numbers so we can use this new type to describe its inputs and outputs:
+O operador `+` no JS funciona em strings e números, então podemos usar esse novo tipo para descrever suas entradas e saídas.
 
 ```js
 // add :: (NumOrString, NumOrString) -> NumOrString
 const add = (a, b) => a + b;
 
-add(1, 2); // Returns number 3
-add('Foo', 2); // Returns string "Foo2"
-add('Foo', 'Bar'); // Returns string "FooBar"
+add(1, 2); // Retorna número 3
+add('Foo', 2); // Retorna string "Foo2"
+add('Foo', 'Bar'); // Retorna string "FooBar"
 ```
 
-Union types are also known as algebraic types, tagged unions, or sum types.
+Tipos de união também são conhecidos como tipos algebráicos, uniões marcadas, ou tipos de soma.
 
-There's a [couple](https://github.com/paldepind/union-type) [libraries](https://github.com/puffnfresh/daggy) in JS which help with defining and using union types.
+Há [algumas](https://github.com/paldepind/union-type) [bibliotecas](https://github.com/puffnfresh/daggy) em JS que ajudam a definir e usar tipos de união. 
 
-## Product type
+## Tipo de produto
 
-A **product** type combines types together in a way you're probably more familiar with:
+Um tipo de **produto** combina tipos de uma forma que você provavelmente já está familiarizado.
 
 ```js
 // point :: (Number, Number) -> {x: Number, y: Number}
 const point = (x, y) => ({x: x, y: y});
 ```
-It's called a product because the total possible values of the data structure is the product of the different values.
+Isso é chamado de produto porque o total de valores possíveis da estrutura de dados ´e o produto dos valores diferentes.
 
-See also [Set theory](https://en.wikipedia.org/wiki/Set_theory).
+Veja também [Teoria dos conjuntos](https://en.wikipedia.org/wiki/Set_theory).
 
-## Option
-Option is a [union type](#union-type) with two cases often called `Some` and `None`.
+## Opção
+Opção é um [tipo de união](#union-type) com duas classes que geralmente são chamadas de  `Some` (_alguma_) e  `None` (_nenhuma_). 
 
-Option is useful for composing functions that might not return a value.
+Opção é útil para compor funções que podem não retornar um valor.
 
 ```js
-// Naive definition
+// Definição inocente
 
 const Some = (v) => ({
     val: v,
@@ -605,7 +612,7 @@ const None = () => ({
 // maybeProp :: (String, {a}) -> Option a
 const maybeProp = (key, obj) => typeof obj[key] === 'undefined' ? None() : Some(obj[key]);
 ```
-Use `chain` to sequence functions that return `Option`s
+Use `chain` para colocar em sequência funções que retornam  `Option`s
 ```js
 
 // getItem :: Cart -> Option CartItem
@@ -622,8 +629,8 @@ getNestedPrice({item: {foo: 1}}); // None()
 getNestedPrice({item: {price: 9.99}}); // Some(9.99)
 ```
 
-`Option` is also known as `Maybe`. `Some` is sometimes called `Just`. `None` is sometimes called `Nothing`.
+`Option` também é conhecido como  `Maybe` (_talvez_). `Some` às vezes é chamada de  `Just` (_apenas_). `None` às vezes é chamada de `Nothing` (_nada_).
 
 ---
 
-__P.S:__ Without the wonderful [contributions](https://github.com/hemanth/functional-programming-jargon/graphs/contributors) this repo would be meaningless!
+__P.S:__ Sem as [contribuções maravilhosas](https://github.com/hemanth/functional-programming-jargon/graphs/contributors) esse repositório não teria sentido algum!
