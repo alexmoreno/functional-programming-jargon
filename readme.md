@@ -24,7 +24,7 @@ Esse documento usa termos definidos na [Fantasy Land spec](https://github.com/fa
 * [Valor](#valor)
 * [Constante](#constante)
 * [Functor](#functor)
-* [Functor Apontado](#functor-apontadoo
+* [Functor Apontado](#functor-apontadoo)
 * [Levantamento](#levantamento)
 * [Transparência Referencial](#transpar%C3%AAncia-referencial)
 * [Raciocínio Equacional](#racioc%C3%ADnio-equacional)
