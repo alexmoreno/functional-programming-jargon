@@ -407,7 +407,7 @@ object.map(compose(f, g)) ≍ object.map(g).map(f)
 
 (`f`, `g` são funções arbitrárias)
 
-Um _functor_ comum no Javascript é o `Array` uma vez que cumpre as duas regras citadas a cima:
+Um _functor_ comum no Javascript é o `Array`, uma vez que cumpre as duas regras citadas acima, como pode ser visto abaixo:
 
 ```js
 [1, 2, 3].map(x => x); // = [1, 2, 3]
