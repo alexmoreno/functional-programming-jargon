@@ -9,7 +9,7 @@ Esse documento usa termos definidos na [Fantasy Land spec](https://github.com/fa
 <!-- RM(noparent,notop) -->
 
 * [Aridade](#aridade)
-* [Funções de Ordem Maior (HOF)](#fun%C3%A7%C3%B5es-de-ordem-maior-hof)
+* [Funções de Ordem Superior (HOF)](#fun%C3%A7%C3%B5es-de-ordem-superior-hof)
 * [Aplicações Parciais](#aplica%C3%A7%C3%B5es-parciais)
 * [Currying](#currying)
 * [Composição de Função](#composi%C3%A7%C3%A3o-de-fun%C3%A7%C3%A3o)
@@ -62,7 +62,7 @@ console.log(aridade); // 2
 // A aridade de soma é 2
 ```
 
-## Funções de Ordem Maior (HOF)
+## Funções de Ordem Superior (HOF)
 
 Uma função que recebe outra função como argumento e/ou retorna uma função.
 
@@ -186,7 +186,7 @@ sort(sort(sort([2,1])))
 
 ## Estilo Livre de Apontamento
 
-Esse estilo se define ao escrever funções que não identificam explicitamente os argumentos usados. Geralmente requer [currying](#currying) ou outra [função de ordem maior](#fun%C3%A7%C3%B5es-de-ordem-maior-hoff). Mais conhecido como programação implícita.
+Esse estilo se define ao escrever funções que não identificam explicitamente os argumentos usados. Geralmente requer [currying](#currying) ou outra [função de ordem superior](#fun%C3%A7%C3%B5es-de-ordem-superior-hoff). Mais conhecido como programação implícita.
 
 ```js
 // Dado
